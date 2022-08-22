@@ -1,3 +1,6 @@
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,7 +13,9 @@ public class Question3 {
 
     }
 
-    public List<String> isValidAbbreviation(List<String> inputList){
+    public List<String> isListValidAbbreviation(List<String> inputList) throws Exception {
+
+        if(inputList.isEmpty() || inputList==null ){ throw new Exception("List empty or null");}
         ArrayList<String> resList=new ArrayList<String>();
         HashMap<String, List<String>> hMap=new HashMap<String,List<String>>();
         for (String val:inputList)
@@ -21,22 +26,31 @@ public class Question3 {
        for (String val: inputList){
            try {
                String abbrev = question2.abbreviationBuilder(val);
-               if (hMap.containsKey(abbrev)){
-                   if (hMap.get(abbrev).size()>1){
-                       resList.add("false");
-                       System.out.println(val+"->"+"false");
-                   }
-                   else{
-                       resList.add("true");
-                       System.out.println(val+"->"+"true");
-                   }
+               boolean isValid=isValidAbbreviation(hMap,abbrev);
+               if (isValid){
+                   resList.add("true");
                }
+               else{
+                   resList.add("false");
+               }
+               System.out.println(val+"->"+isValid);
            }
            catch (Exception e){}
        }
        return resList;
 
     }
+
+    public boolean isValidAbbreviation(HashMap<String, List<String>> hMap,String abbrev){
+
+        if (hMap.containsKey(abbrev)){
+            if (hMap.get(abbrev).size()>1) {
+                return false;
+            }
+            }
+        return true;
+    }
+
 
 
     public HashMap<String, List<String>> addToHashMap(HashMap<String, List<String>> currMap,String values){
@@ -51,7 +65,8 @@ public class Question3 {
                 arrList.add(values);
                 currMap.put(key,arrList);
 
-            } else
+            }
+            else
             {
                 arrList.add(values);
                 currMap.put(key, arrList);
@@ -62,11 +77,45 @@ public class Question3 {
         return currMap;
     }
 
+    @Test
+    void test1() throws Exception {
+        Question2 question2a=new Question2();
+        Question3 question3a= new Question3(question2a);
+        ArrayList<String> arrayList=new ArrayList<String>(Arrays.asList("internationalization", "localization","accessibility","automatically"));
+        ArrayList<String> outputList=new ArrayList<String>(Arrays.asList("true", "true","false","false"));
+        Assert.assertEquals(outputList,question3a.isListValidAbbreviation(arrayList));
+    }
+
+    @Test
+    void test2() throws Exception {
+        Question2 question2a=new Question2();
+        Question3 question3a= new Question3(question2a);
+        ArrayList<String> arrayList=new ArrayList<String>(Arrays.asList("internationalization", "localization","manual","automatically"));
+        ArrayList<String> outputList=new ArrayList<String>(Arrays.asList("true", "true","true","true"));
+        Assert.assertEquals(outputList,question3a.isListValidAbbreviation(arrayList));
+    }
+
     public static void main(String[] args){
         Question2 question2=new Question2();
         Question3 question3= new Question3(question2);
         ArrayList<String> arrayList=new ArrayList<String>(Arrays.asList("internationalization", "localization","accessibility","automatically"));
-        question3.isValidAbbreviation(arrayList);
+
+        try {
+            question3.isListValidAbbreviation(arrayList);
+            System.out.println();
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            question3.test1();
+            System.out.println();
+            question3.test2();
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 }

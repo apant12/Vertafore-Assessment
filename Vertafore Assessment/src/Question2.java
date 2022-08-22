@@ -1,3 +1,8 @@
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
+
 public class Question2 {
 
     /*
@@ -27,16 +32,43 @@ public class Question2 {
         stringBuilder.append(firstChar).append(lengthOfWordAftRemoval).append(lastChar);
         return stringBuilder.toString();
     }
-    public static void main(String[] args){
+    @Test
+    public void test1() throws Exception {
+        Question2 question2=new Question2();
+
+        Assert.assertEquals("a11y",question2.abbreviationBuilder("accessibility"));
+    }
+
+    @Test
+    public void test2() throws Exception {
+        Question2 question2=new Question2();
+
+        Assert.assertEquals("i18n",question2.abbreviationBuilder("internationalization"));
+
+    }
+
+    public static void main(String[] args) throws Exception {
         Question2 question2=new Question2();
         try {
-            System.out.println(question2.abbreviationBuilder("accessibility"));
+            System.out.println("accessibility"+"->"+question2.abbreviationBuilder("accessibility"));
         }
         catch (Exception e){}
 
         try {
-            System.out.println(question2.abbreviationBuilder("automatically"));
+            System.out.println("automatically"+"->"+question2.abbreviationBuilder("automatically"));
         }
         catch (Exception e){}
+
+        try {
+            System.out.println("internationalization"+"->"+question2.abbreviationBuilder("internationalization"));
+        }
+        catch (Exception e){}
+        try {
+            System.out.println("localization"+"->"+question2.abbreviationBuilder("localization"));
+        }
+        catch (Exception e){}
+
+        question2.test1();
+        question2.test2();
     }
 }
