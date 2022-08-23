@@ -12,7 +12,8 @@ public class Question3 {
         this.question2=question2;
 
     }
-
+    // This takes a List<String> of valid abbreviation and returns a list of true and false string depending on what isvalidAbbreviation method returns.
+    //The time complexity is O(n)
     public List<String> isListValidAbbreviation(List<String> inputList) throws Exception {
 
         if(inputList.isEmpty() || inputList==null ){ throw new Exception("List empty or null");}
@@ -41,6 +42,8 @@ public class Question3 {
 
     }
 
+
+    //This method checks if the abbreviation is valid and returns a boolean
     public boolean isValidAbbreviation(HashMap<String, List<String>> hMap,String abbrev){
 
         if (hMap.containsKey(abbrev)){
@@ -52,7 +55,7 @@ public class Question3 {
     }
 
 
-
+    // this method adds all the abbreviation as key to hashmap with a list of strings attached to it.
     public HashMap<String, List<String>> addToHashMap(HashMap<String, List<String>> currMap,String values){
 
         try {

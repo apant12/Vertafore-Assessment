@@ -17,6 +17,7 @@ public class Question2 {
     public Question2(){
 
     }
+    //The abbreviation builder builds abbreviation by taking in an input. The time complexity is O(1)
     public String abbreviationBuilder(String input ) throws Exception {
         if (input.length()==0){
             throw new Exception("Empty String");

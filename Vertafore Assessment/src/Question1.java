@@ -19,12 +19,12 @@ e.g. (7, 13, 13, 18, 29, 33)
 
 
     }
-
+    // Used to reset the library
     public Object[] reset() {
         return initialArr;
     }
 
-    public Object[] shuffle() {
+    public Object[] shuffle() { // Method that does the shuffle. At time complexity of O(n)
         Object[] currArr = initialArr.clone();
 
         for(int i = 0; i < currArr.length; i++) {
@@ -40,13 +40,15 @@ e.g. (7, 13, 13, 18, 29, 33)
         arr[i] = arr[j];
         arr[j] = temp;
     }
-
+    //Main Method, that
     public static void main(String[] args){
         Question1 question1=new Question1(new Object[] {1,2,3,4,5,6,7,8});
         System.out.println(Arrays.toString(question1.shuffle()));
         Question1 question2=new Question1(new Object[] {"a","b","c","d","e","f","g","h"});
         System.out.println(Arrays.toString(question2.shuffle()));
         question1.test1();
+        question1.test2();
+        question1.test3();
     }
 
     @Test
